@@ -1,10 +1,10 @@
 import {Pokemon} from "./Pokemon";
-import {Competence} from "./Competence";
 import {getRandInt} from "../Utils";
 
 export class Combat {
 
     static tour
+    static combat: Array<String> = [];
 
     static PremierAttaquant(pokemon1: Pokemon, pokemon2: Pokemon){
         if (pokemon1.vitesse > pokemon2.vitesse){
@@ -25,6 +25,8 @@ export class Combat {
         return new Promise((resolve, reject) => {
             let premier;
             let second;
+            let round;
+            let damage;
             Combat.tour = setInterval(() => {
                 console.log("Round start");
                 if (Combat.PremierAttaquant(pokemon1, pokemon2) == pokemon1) {
@@ -36,7 +38,9 @@ export class Combat {
                 }
 
                 console.log(`${premier.nom} commence`);
-                premier.attaquePokemon(second, premier.competences[getRandInt(4)]);
+                damage = premier.attaquePokemon(second, premier.competences[getRandInt(4)]);
+                round = `${premier.nom} attaque ${second.nom} et inflige ${damage}, il reste ${second.pv} à ${second.nom}`
+                Combat.combat.push(round)
                 if (second.pv <= 0) {
                     console.log(`Victoire de ${premier.nom} il lui reste ${premier.pv} pv`)
                     resolve(premier);
@@ -44,7 +48,9 @@ export class Combat {
                     return;
                 }
 
-                second.attaquePokemon(premier, second.competences[getRandInt(4)]);
+                damage = second.attaquePokemon(premier, second.competences[getRandInt(4)]);
+                round = `${second.nom} attaque ${premier.nom} et inflige ${damage}, il reste ${premier.pv} à ${premier.nom}`
+                Combat.combat.push(round)
                 if (premier.pv <= 0) {
                     console.log(`Victoire de ${second.nom} il lui reste ${second.pv} pv`)
                     resolve(second);

@@ -24,6 +24,7 @@ describe('Test Pokemon.ts', () => {
 
     test('Battle should get salamech', async () => {
         expect(await Combat.Simulation(Dracaufeu, Grolem)).toEqual(Dracaufeu);
+        console.log("recap:", Combat.combat)
     });
 
     test('should pick pikachu', () => {

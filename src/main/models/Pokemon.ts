@@ -32,13 +32,14 @@ export class Pokemon {
         this.critique = vitesse / 2;
     }
 
-    attaquePokemon(defenseur: Pokemon, competence: Competence): void {
+    attaquePokemon(defenseur: Pokemon, competence: Competence): number {
+        let damage = 0;
         if (competence.pp > 0) {
             if (competence.typeCompetence == "special") {
                 if (competence.element == "sol" && defenseur.element.includes("vol")) {
                     console.log("Cette attaque n'affecte pas ce pokemon")
                 } else {
-                    const damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaqueSpe * competence.puissance / defenseur.defenseSpe) / 50) + 2
+                    damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaqueSpe * competence.puissance / defenseur.defenseSpe) / 50) + 2
                     if (damage > defenseur.pv) {
                         defenseur.pv = 0
                         console.log(`t'es mort ${defenseur.nom}`)
@@ -51,7 +52,7 @@ export class Pokemon {
                 if (competence.element == "sol" && defenseur.element.includes("vol")) {
                     console.log("cette attaque n'affecte pas ce pokemon")
                 } else {
-                    const damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaque * competence.puissance / defenseur.defense) / 50) + 2
+                    damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaque * competence.puissance / defenseur.defense) / 50) + 2
                     if (damage > defenseur.pv) {
                         defenseur.pv = 0
                         console.log(`t'es mort ${defenseur.nom}`)
@@ -65,6 +66,7 @@ export class Pokemon {
             }
             competence.pp -= 1
         }
+        return damage;
     }
 
     checkHit(competence: Competence): boolean{
