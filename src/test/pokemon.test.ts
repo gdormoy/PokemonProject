@@ -22,7 +22,7 @@ describe('Test Pokemon.ts', () => {
     //     expect(grolem.pv).toBe(100);
     // })
 
-    test('draco should not take damage', () => {
+    test('draco should don\'t take damage', () => {
         grolem.attaquePokemon(draco, grolem.competences[0])
         expect(draco.pv).toBe(100);
     })
