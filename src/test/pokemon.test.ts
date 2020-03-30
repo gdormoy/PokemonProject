@@ -29,6 +29,6 @@ describe('Test Pokemon.ts', () => {
     //
     test('pika should get minus 60hp', () => {
         grolem.attaquePokemon(pika, grolem.competences[0])
-        expect(pika.pv).toBe(13.2);
+        expect(pika.pv).toBe(14);
     })
 });

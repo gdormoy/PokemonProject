@@ -32,32 +32,30 @@ export class Pokemon {
     }
 
     attaquePokemon(defenseur: Pokemon, competence: Competence): void {
-        if (competence.pp < 0) {
-            if (competence.typeCompetence === "special") {
+        if (competence.pp > 0) {
+            if (competence.typeCompetence == "special") {
                 if (competence.element == "sol" && defenseur.element.includes("vol")) {
                     console.log("Cette attaque n'affecte pas ce pokemon")
                 } else {
-                    let damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaqueSpe * competence.puissance / defenseur.defenseSpe) / 50) + 2
-                    let res = defenseur.pv - damage
-                    if (res > defenseur.pv) {
+                    const damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaqueSpe * competence.puissance / defenseur.defenseSpe) / 50) + 2
+                    if ((defenseur.pv - damage) > defenseur.pv) {
                         defenseur.pv = 0
                         console.log("t'es mort")
                     } else {
-                        console.log(res)
+                        console.log(defenseur.pv - damage)
                         defenseur.pv -= damage
                     }
                 }
-            } else if (competence.typeCompetence === "physique") {
-                if (competence.element === "sol" && defenseur.element.includes("vol")) {
+            } else if (competence.typeCompetence == "physique") {
+                if (competence.element == "sol" && defenseur.element.includes("vol")) {
                     console.log("cette attaque n'affecte pas ce pokemon")
                 } else {
-                    let damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaque * competence.puissance / defenseur.defense) / 50) + 2
-                    let res = defenseur.pv - damage
-                    if (res > defenseur.pv) {
+                    const damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaque * competence.puissance / defenseur.defense) / 50) + 2
+                    if ((defenseur.pv - damage) > defenseur.pv) {
                         defenseur.pv = 0
                         console.log("T'es mort")
                     } else {
-                        console.log(res)
+                        console.log(damage)
                         defenseur.pv -= damage
                     }
                 }
