@@ -1,86 +1,73 @@
 import {Competence} from "./Competence"
 
 export class Pokemon {
-    constructor(private _nom: string, private _pv: number, private _precision: number, private _vitess: number, private _attaque: number,
-                private _defense: number, private _attaqueSpe: number, private _defenseSpe: number,
-                private _competences: [Competence]) {
+    nom: string;
+    element: string
+    vitesse: number;
+    attaque: number;
+    attaqueSpe: number
+    pv: number;
+    precision: number;
+    niveau: number;
+    defense: number;
+    defenseSpe: number;
+    critique: number;
+    competences: Competence[];
+
+    constructor(nom: string, niveau: number, element: string, pv: number, precision: number, vitesse: number, attaque: number,
+                defense: number, attaqueSpe: number, defenseSpe: number,
+                competences: [Competence]) {
+        this.nom = nom;
+        this.niveau = niveau;
+        this.element = element;
+        this.pv = pv;
+        this.precision = precision;
+        this.vitesse = vitesse;
+        this.attaque = attaque
+        this.attaqueSpe = attaqueSpe;
+        this.defense = defense;
+        this.defenseSpe = defenseSpe;
+        this.competences = competences;
+        this.critique = vitesse / 2;
     }
 
-    get nom(): string {
-        return this._nom;
-    }
-
-    set nom(value: string) {
-        this._nom = value;
-    }
-
-    get pv(): number {
-        return this._pv;
-    }
-
-    set pv(value: number) {
-        this._pv = value;
-    }
-
-    get vitess(): number {
-        return this._vitess;
-    }
-
-    set vitess(value: number) {
-        this._vitess = value;
-    }
-
-    get attaque(): number {
-        return this._attaque;
-    }
-
-    set attaque(value: number) {
-        this._attaque = value;
-    }
-
-    get defense(): number {
-        return this._defense;
-    }
-
-    set defense(value: number) {
-        this._defense = value;
-    }
-
-    get attaqueSpe(): number {
-        return this._attaqueSpe;
-    }
-
-    set attaqueSpe(value: number) {
-        this._attaqueSpe = value;
-    }
-
-    get defenseSpe(): number {
-        return this._defenseSpe;
-    }
-
-    set defenseSpe(value: number) {
-        this._defenseSpe = value;
-    }
-
-    get precision(): number {
-        return this._precision;
-    }
-
-    set precision(value: number) {
-        this._precision = value;
-    }
-
-    get competences(): [Competence] {
-        return this._competences;
-    }
-
-    set competences(value: [Competence]) {
-        this._competences = value;
+    attaquePokemon(defenseur: Pokemon, competence: Competence): void {
+        if (competence.pp < 0) {
+            if (competence.typeCompetence === "special") {
+                if (competence.element == "sol" && defenseur.element.includes("vol")) {
+                    console.log("Cette attaque n'affecte pas ce pokemon")
+                } else {
+                    let damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaqueSpe * competence.puissance / defenseur.defenseSpe) / 50) + 2
+                    let res = defenseur.pv - damage
+                    if (res > defenseur.pv) {
+                        defenseur.pv = 0
+                        console.log("t'es mort")
+                    } else {
+                        console.log(res)
+                        defenseur.pv -= damage
+                    }
+                }
+            } else if (competence.typeCompetence === "physique") {
+                if (competence.element === "sol" && defenseur.element.includes("vol")) {
+                    console.log("cette attaque n'affecte pas ce pokemon")
+                } else {
+                    let damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaque * competence.puissance / defenseur.defense) / 50) + 2
+                    let res = defenseur.pv - damage
+                    if (res > defenseur.pv) {
+                        defenseur.pv = 0
+                        console.log("T'es mort")
+                    } else {
+                        console.log(res)
+                        defenseur.pv -= damage
+                    }
+                }
+            } else {
+                console.log("Est-ce vraiment une attaque ?")
+            }
+            competence.pp -= 1
+        }
     }
 }
 
 
 
-function attaque() {
-
-}

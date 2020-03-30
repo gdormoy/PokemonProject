@@ -1,12 +1,13 @@
 import {Pokemon} from "./Pokemon";
+import {Competence} from "./Competence";
 
 export class Combat {
 
 
     static PremierAttaquant(pokemon1: Pokemon, pokemon2: Pokemon){
-        if (pokemon1.vitess > pokemon2.vitess){
+        if (pokemon1.vitesse > pokemon2.vitesse){
             return pokemon1
-        } else if (pokemon1.vitess < pokemon2.vitess){
+        } else if (pokemon1.vitesse < pokemon2.vitesse){
             return pokemon2
         } else {
             let premier = Math.floor(Math.random() * 1) + 1
