@@ -1,4 +1,5 @@
 import {Competence} from "./Competence"
+import {getRandInt} from "../Utils";
 
 export class Pokemon {
     nom: string;
@@ -16,7 +17,7 @@ export class Pokemon {
 
     constructor(nom: string, niveau: number, element: string, pv: number, precision: number, vitesse: number, attaque: number,
                 defense: number, attaqueSpe: number, defenseSpe: number,
-                competences: [Competence]) {
+                competences: Competence[]) {
         this.nom = nom;
         this.niveau = niveau;
         this.element = element;
@@ -38,7 +39,7 @@ export class Pokemon {
                     console.log("Cette attaque n'affecte pas ce pokemon")
                 } else {
                     const damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaqueSpe * competence.puissance / defenseur.defenseSpe) / 50) + 2
-                    if ((defenseur.pv - damage) > defenseur.pv) {
+                    if (damage > defenseur.pv) {
                         defenseur.pv = 0
                         console.log("t'es mort")
                     } else {
@@ -51,7 +52,7 @@ export class Pokemon {
                     console.log("cette attaque n'affecte pas ce pokemon")
                 } else {
                     const damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaque * competence.puissance / defenseur.defense) / 50) + 2
-                    if ((defenseur.pv - damage) > defenseur.pv) {
+                    if (damage > defenseur.pv) {
                         defenseur.pv = 0
                         console.log("T'es mort")
                     } else {
@@ -64,6 +65,11 @@ export class Pokemon {
             }
             competence.pp -= 1
         }
+    }
+
+    checkHit(competence: Competence): boolean{
+        let acc = getRandInt(competence.precision) + this.precision;
+        return acc > 80;
     }
 }
 
