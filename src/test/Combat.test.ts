@@ -6,7 +6,7 @@ import {Competence} from ".//../main/models/Competence"
 describe('Test Pokemon.ts', () => {
 
 
-    const Dracaufeu = new Pokemon("Dracaufeu", 70, "feu/vol", 200, 50, 40, 60,
+    const Dracaufeu = new Pokemon("Dracaufeu", 70, "feu/vol", 400, 50, 40, 60,
         50, 80, 50, [
             new Competence("Roue de feu", "special", 65, "feu", 90, 10),
             new Competence("Deflagration", "special", 120, "feu", 80, 5),
@@ -23,7 +23,7 @@ describe('Test Pokemon.ts', () => {
         ])
 
     test('Battle should get salamech', async () => {
-        expect(await Combat.Simulation(Dracaufeu, Grolem)).toEqual(Grolem);
+        expect(await Combat.Simulation(Dracaufeu, Grolem)).toEqual(Dracaufeu);
     });
 
     test('should pick pikachu', () => {

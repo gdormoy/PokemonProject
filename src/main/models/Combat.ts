@@ -38,6 +38,7 @@ export class Combat {
                 console.log(`${premier.nom} commence`);
                 premier.attaquePokemon(second, premier.competences[getRandInt(4)]);
                 if (second.pv <= 0) {
+                    console.log(`Victoire de ${premier.nom} il lui reste ${premier.pv} pv`)
                     resolve(premier);
                     clearInterval(Combat.tour);
                     return;
@@ -45,6 +46,7 @@ export class Combat {
 
                 second.attaquePokemon(premier, second.competences[getRandInt(4)]);
                 if (premier.pv <= 0) {
+                    console.log(`Victoire de ${second.nom} il lui reste ${second.pv} pv`)
                     resolve(second);
                     clearInterval(Combat.tour);
                     return;

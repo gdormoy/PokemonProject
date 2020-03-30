@@ -41,7 +41,7 @@ export class Pokemon {
                     const damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaqueSpe * competence.puissance / defenseur.defenseSpe) / 50) + 2
                     if (damage > defenseur.pv) {
                         defenseur.pv = 0
-                        console.log("t'es mort")
+                        console.log(`t'es mort ${defenseur.nom}`)
                     } else {
                         console.log(defenseur.pv - damage)
                         defenseur.pv -= damage
@@ -54,7 +54,7 @@ export class Pokemon {
                     const damage = Math.floor(Math.floor(Math.floor(2 * this.niveau / 5 + 2) * this.attaque * competence.puissance / defenseur.defense) / 50) + 2
                     if (damage > defenseur.pv) {
                         defenseur.pv = 0
-                        console.log("T'es mort")
+                        console.log(`t'es mort ${defenseur.nom}`)
                     } else {
                         console.log(damage)
                         defenseur.pv -= damage
